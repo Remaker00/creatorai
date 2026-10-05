@@ -1,26 +1,129 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  --color-canvas: #0c0d10;
+  --color-surface: #131418;
+  --color-surface-2: #191a1f;
+  --color-surface-3: #212228;
+  --color-line: #24252c;
+  --color-line-strong: #30313a;
+  --color-fg: #ececf1;
+  --color-fg-muted: #9a9ba6;
+  --color-fg-subtle: #6b6c77;
+  --color-accent: #8b7cff;
+  --color-accent-strong: #a194ff;
+  --color-accent-soft: rgb(139 124 255 / 0.12);
+  --color-success: #3ecf8e;
+  --color-warning: #f5b94d;
+  --color-danger: #f0616d;
+  --color-info: #5aa9ff;
+
+  --radius-card: 12px;
+
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-fade-in: fade-in 180ms ease-out;
+  --animate-slide-in: slide-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  @keyframes shimmer {
+    from {
+      background-position: -200% 0;
+    }
+    to {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
 }
 
+/* Non-utility tokens (charts, skeleton highlight). */
+:root {
+  --chart-received: #5f6170;
+  --chart-grid: #22232a;
+  --chart-cursor: rgb(255 255 255 / 0.03);
+  --shimmer-highlight: #2b2c34;
+  color-scheme: dark;
+}
+
+/* Light theme: same token names, so every `bg-surface`/`text-fg-muted` utility follows. Set by ThemeScript. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-canvas: #f6f6f8;
+  --color-surface: #ffffff;
+  --color-surface-2: #f3f3f6;
+  --color-surface-3: #e9e9ee;
+  --color-line: #e4e4ea;
+  --color-line-strong: #d2d2da;
+  --color-fg: #16161b;
+  --color-fg-muted: #565764;
+  --color-fg-subtle: #83848f;
+  --color-accent: #6d5cf0;
+  --color-accent-strong: #5641e0;
+  --color-accent-soft: rgb(109 92 240 / 0.1);
+  --color-success: #148a57;
+  --color-warning: #a8670f;
+  --color-danger: #d42f3f;
+  --color-info: #2271cc;
+  --chart-received: #b4b5c0;
+  --chart-grid: #ececf1;
+  --chart-cursor: rgb(0 0 0 / 0.03);
+  --shimmer-highlight: #f4f4f7;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-fg);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+
+::selection {
+  background: rgb(139 124 255 / 0.35);
+}
+
+.ai-glow {
+  box-shadow:
+    0 0 0 1px rgb(139 124 255 / 0.25),
+    0 8px 32px -12px rgb(139 124 255 / 0.35);
+}
+
+.shimmer {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-surface-3) 0%,
+    var(--shimmer-highlight) 50%,
+    var(--color-surface-3) 100%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+input[type="range"] {
+  accent-color: var(--color-accent);
 }

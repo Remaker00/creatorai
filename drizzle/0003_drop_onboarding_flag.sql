@@ -1,0 +1,1 @@
+ALTER TABLE "workspaces" DROP COLUMN "onboarding_completed_at";

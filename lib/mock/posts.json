@@ -1,0 +1,27 @@
+{
+  "posts": [
+    { "id": "p_lofoten", "platform": "instagram", "type": "reel", "caption": "Chasing the last light in Lofoten 🌄 4 days, 3 storms, 1 sunrise worth all of it.", "postedHoursAgo": 20, "likes": 48210, "views": 612000, "coverHue": 18 },
+    { "id": "p_presets", "platform": "instagram", "type": "carousel", "caption": "Before / after with the new Moody Coast presets. Swipe for the RAW files →", "postedHoursAgo": 70, "likes": 21940, "views": 188000, "coverHue": 205 },
+    { "id": "p_gear", "platform": "instagram", "type": "post", "caption": "Everything I packed for 3 weeks in Norway. Yes, the tripod came too.", "postedHoursAgo": 140, "likes": 15320, "views": 96000, "coverHue": 140 },
+    { "id": "p_iceland", "platform": "instagram", "type": "reel", "caption": "Skógafoss at 5am, no crowds, just mist 💨", "postedHoursAgo": 260, "likes": 66800, "views": 1040000, "coverHue": 175 }
+  ],
+  "comments": [
+    { "id": "cm1", "postId": "p_lofoten", "authorHandle": "nordic.nomad", "authorHue": 210, "body": "Where exactly is this? Need to add it to my list 😍", "likes": 312, "minutesAgo": 35, "status": "pending", "intent": "general" },
+    { "id": "cm2", "postId": "p_lofoten", "authorHandle": "jess.captures", "authorHue": 330, "body": "What settings did you use for the sunrise shot?", "likes": 128, "minutesAgo": 52, "status": "pending", "intent": "product_question" },
+    { "id": "cm3", "postId": "p_lofoten", "authorHandle": "tomhikes", "authorHue": 90, "body": "This is unreal. Best thing on my feed today", "likes": 64, "minutesAgo": 80, "status": "pending", "intent": "fan_message" },
+    { "id": "cm4", "postId": "p_lofoten", "authorHandle": "cheap.likes.247", "authorHue": 60, "body": "Promote your page with our followers service 🔥 check bio", "likes": 0, "minutesAgo": 90, "status": "pending", "intent": "spam" },
+    { "id": "cm5", "postId": "p_lofoten", "authorHandle": "ana.lens", "authorHue": 15, "body": "The colours here!! Is this edited with your presets?", "likes": 201, "minutesAgo": 140, "status": "replied", "intent": "product_question", "reply": { "body": "Yes! This is Nordic Gold from the new pack ✨", "author": "ai", "minutesAgo": 130 } },
+    { "id": "cm6", "postId": "p_lofoten", "authorHandle": "wildbyluca", "authorHue": 260, "body": "How cold was it 🥶", "likes": 44, "minutesAgo": 300, "status": "replied", "intent": "general", "reply": { "body": "-12°C with wind chill. Hand warmers saved me 😂", "author": "creator", "minutesAgo": 280 } },
+
+    { "id": "cm7", "postId": "p_presets", "authorHandle": "phoneonly.photo", "authorHue": 190, "body": "Do these work in Lightroom mobile?", "likes": 87, "minutesAgo": 400, "status": "pending", "intent": "product_question" },
+    { "id": "cm8", "postId": "p_presets", "authorHandle": "kat.visuals", "authorHue": 300, "body": "Just bought them, the coast preset is 🔥", "likes": 52, "minutesAgo": 610, "status": "pending", "intent": "fan_message" },
+    { "id": "cm9", "postId": "p_presets", "authorHandle": "rui.frames", "authorHue": 40, "body": "My download link expired, who do I contact?", "likes": 3, "minutesAgo": 720, "status": "pending", "intent": "complaint" },
+    { "id": "cm10", "postId": "p_presets", "authorHandle": "sam.outdoor", "authorHue": 120, "body": "Price?", "likes": 9, "minutesAgo": 900, "status": "handled", "intent": "pricing" },
+
+    { "id": "cm11", "postId": "p_gear", "authorHandle": "travel.with.ines", "authorHue": 350, "body": "Which tripod is that? Looks super light", "likes": 76, "minutesAgo": 1500, "status": "pending", "intent": "product_question" },
+    { "id": "cm12", "postId": "p_gear", "authorHandle": "mike.b", "authorHue": 230, "body": "No drone? 👀", "likes": 18, "minutesAgo": 1700, "status": "replied", "intent": "general", "reply": { "body": "Drone stayed home this time, Lofoten rules are strict!", "author": "ai", "minutesAgo": 1690 } },
+
+    { "id": "cm13", "postId": "p_iceland", "authorHandle": "emma.wanders", "authorHue": 120, "body": "5am?? dedication 👏", "likes": 140, "minutesAgo": 9000, "status": "replied", "intent": "fan_message", "reply": { "body": "Worth every lost hour of sleep 😴", "author": "ai", "minutesAgo": 8990 } },
+    { "id": "cm14", "postId": "p_iceland", "authorHandle": "jon.ice", "authorHue": 200, "body": "Is the course still on sale?", "likes": 22, "minutesAgo": 7000, "status": "pending", "intent": "product_question" }
+  ]
+}

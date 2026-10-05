@@ -1,0 +1,17 @@
+[
+  {
+    "id": "acc_ig_main",
+    "platform": "instagram",
+    "handle": "mayacreates",
+    "displayName": "Maya Chen",
+    "followers": 312400,
+    "avatarHue": 262,
+    "status": "connected",
+    "connectedDaysAgo": 64,
+    "lastSyncedMinutesAgo": 3,
+    "permissions": ["messages", "comments", "insights", "profile"],
+    "syncDms": true,
+    "syncComments": true,
+    "webhook": { "healthy": true, "delivered24h": 1284, "failed24h": 0, "medianLatencyMs": 1200 }
+  }
+]

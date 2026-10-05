@@ -1,0 +1,168 @@
+[
+  {
+    "id": "c_jordan",
+    "platform": "instagram",
+    "contact": { "id": "u_jordan", "name": "Jordan Patel", "handle": "northbound.packs", "followers": 48200, "verified": true, "avatarHue": 24, "location": "Denver, CO", "firstSeenDaysAgo": 2 },
+    "intent": "collaboration",
+    "sentiment": "positive",
+    "status": "new",
+    "handledBy": null,
+    "unread": true,
+    "messages": [
+      { "author": "contact", "body": "Hey Maya! I'm Jordan, I run partnerships at Northbound Packs. We just launched a 35L travel pack built for photographers.", "minutesAgo": 9 },
+      { "author": "contact", "body": "We'd love to send you one and talk about a paid collab around your Lofoten trip content. Would you be open to that?", "minutesAgo": 8 }
+    ]
+  },
+  {
+    "id": "c_priya",
+    "platform": "instagram",
+    "contact": { "id": "u_priya", "name": "Priya Nair", "handle": "priya.shoots", "followers": 2140, "verified": false, "avatarHue": 330, "location": "Bangalore", "firstSeenDaysAgo": 41 },
+    "intent": "product_question",
+    "sentiment": "neutral",
+    "status": "new",
+    "handledBy": null,
+    "unread": true,
+    "messages": [
+      { "author": "contact", "body": "Hi! Quick question — do your Lightroom presets work on mobile? I mostly edit on my phone 📱", "minutesAgo": 22 }
+    ]
+  },
+  {
+    "id": "c_lucas",
+    "platform": "instagram",
+    "contact": { "id": "u_lucas", "name": "Lucas Moreau", "handle": "lucas.mrv", "followers": 860, "verified": false, "avatarHue": 200, "location": "Lyon", "firstSeenDaysAgo": 120 },
+    "intent": "shipping",
+    "sentiment": "negative",
+    "status": "needs_review",
+    "handledBy": null,
+    "unread": true,
+    "messages": [
+      { "author": "contact", "body": "Hey, I ordered the Nordic print bundle 9 days ago (order #MC-4821) and the tracking hasn't updated since Tuesday.", "minutesAgo": 47 },
+      { "author": "contact", "body": "Is my order lost? It was supposed to be a birthday gift 😕", "minutesAgo": 46 }
+    ]
+  },
+  {
+    "id": "c_aisha",
+    "platform": "instagram",
+    "contact": { "id": "u_aisha", "name": "Aisha Bello", "handle": "aisha.frames", "followers": 5310, "verified": false, "avatarHue": 160, "location": "Lagos", "firstSeenDaysAgo": 14 },
+    "intent": "product_question",
+    "sentiment": "positive",
+    "status": "new",
+    "handledBy": "ai",
+    "unread": true,
+    "messages": [
+      { "author": "contact", "body": "Is the Light & Story course beginner friendly? I just got my first camera (Sony a6400)", "minutesAgo": 190 },
+      { "author": "ai", "body": "Hey Aisha! Congrats on the a6400, great first camera ✨ Light & Story is built for beginners — module 1 starts with exposure basics before we get into storytelling.\n\n— Maya", "minutesAgo": 186 },
+      { "author": "contact", "body": "Amazing, thank you! Does the course come with lifetime access? I travel a lot and want to take it slowly", "minutesAgo": 64 }
+    ]
+  },
+  {
+    "id": "c_ben",
+    "platform": "instagram",
+    "contact": { "id": "u_ben", "name": "Ben Okafor", "handle": "brightside.agency", "followers": 12900, "verified": true, "avatarHue": 45, "location": "London", "firstSeenDaysAgo": 1 },
+    "intent": "pricing",
+    "sentiment": "neutral",
+    "status": "new",
+    "handledBy": null,
+    "unread": false,
+    "messages": [
+      { "author": "contact", "body": "Hi Maya, Ben from Brightside Agency. What's your rate for a sponsored reel + 3 stories? Client is an outdoor apparel brand, budget is flexible.", "minutesAgo": 95 }
+    ]
+  },
+  {
+    "id": "c_daniel",
+    "platform": "instagram",
+    "contact": { "id": "u_daniel", "name": "Daniel Kim", "handle": "dan.outdoors", "followers": 1720, "verified": false, "avatarHue": 0, "location": "Seattle", "firstSeenDaysAgo": 8 },
+    "intent": "complaint",
+    "sentiment": "negative",
+    "status": "needs_review",
+    "handledBy": null,
+    "unread": false,
+    "messages": [
+      { "author": "contact", "body": "The download link for the Moody Coast preset pack is broken. Paid $29 and still can't get the files. Pretty frustrating tbh", "minutesAgo": 240 }
+    ]
+  },
+  {
+    "id": "c_olivia",
+    "platform": "instagram",
+    "contact": { "id": "u_olivia", "name": "Olivia Grant", "handle": "liv.makes", "followers": 640, "verified": false, "avatarHue": 280, "firstSeenDaysAgo": 60 },
+    "intent": "general",
+    "sentiment": "neutral",
+    "status": "new",
+    "handledBy": null,
+    "unread": true,
+    "messages": [
+      { "author": "contact", "body": "Love your work! Random q but what do you think about the election? You never talk about politics on here", "minutesAgo": 310 }
+    ]
+  },
+  {
+    "id": "c_growth",
+    "platform": "instagram",
+    "contact": { "id": "u_growth", "name": "Growth Boost", "handle": "growth.boost.official", "followers": 112, "verified": false, "avatarHue": 100, "firstSeenDaysAgo": 0 },
+    "intent": "spam",
+    "sentiment": "neutral",
+    "status": "new",
+    "handledBy": null,
+    "unread": false,
+    "messages": [
+      { "author": "contact", "body": "Hello dear 💰 we can grow your followers 10x with our premium promo service! Guaranteed real followers, DM for prices!!", "minutesAgo": 380 }
+    ]
+  },
+  {
+    "id": "c_sofia",
+    "platform": "instagram",
+    "contact": { "id": "u_sofia", "name": "Sofia Lindqvist", "handle": "sofiaa.ldn", "followers": 3900, "verified": false, "avatarHue": 350, "location": "London", "firstSeenDaysAgo": 200 },
+    "intent": "fan_message",
+    "sentiment": "positive",
+    "status": "replied",
+    "handledBy": "ai",
+    "unread": false,
+    "messages": [
+      { "author": "contact", "body": "Your Lofoten reel literally made me book a trip 😭 thank you for the inspo", "minutesAgo": 620 },
+      { "author": "ai", "body": "Sofia this made my day!! 🥹 You're going to love it — go to Reine at sunrise if you can. Have the best trip!\n\n— Maya", "minutesAgo": 612 },
+      { "author": "contact", "body": "omg you replied!! will do 🙏", "minutesAgo": 600 }
+    ]
+  },
+  {
+    "id": "c_kenji",
+    "platform": "instagram",
+    "contact": { "id": "u_kenji", "name": "Kenji Watanabe", "handle": "kenji.visuals", "followers": 26800, "verified": false, "avatarHue": 215, "location": "Tokyo", "firstSeenDaysAgo": 300 },
+    "intent": "collaboration",
+    "sentiment": "positive",
+    "status": "replied",
+    "handledBy": "creator",
+    "unread": false,
+    "messages": [
+      { "author": "contact", "body": "Heard you're coming to Tokyo next month! Would love to do a night photo walk collab in Shinjuku", "minutesAgo": 1440 },
+      { "author": "creator", "body": "Kenji!! Yes 100%. I land on the 14th, let's plan something for that weekend", "minutesAgo": 1380 }
+    ]
+  },
+  {
+    "id": "c_emma",
+    "platform": "instagram",
+    "contact": { "id": "u_emma", "name": "Emma Rossi", "handle": "emma.wanders", "followers": 1280, "verified": false, "avatarHue": 120, "location": "Milan", "firstSeenDaysAgo": 90 },
+    "intent": "general",
+    "sentiment": "positive",
+    "status": "resolved",
+    "handledBy": "ai",
+    "unread": false,
+    "messages": [
+      { "author": "contact", "body": "What camera and lens did you use for the Iceland waterfall shot?", "minutesAgo": 2600 },
+      { "author": "ai", "body": "Hi Emma! That one was a Sony A7 IV with the 16-35mm f/4, 1/4s handheld. Full gear list is on mayacreates.co ✨\n\n— Maya", "minutesAgo": 2590 },
+      { "author": "contact", "body": "Perfect thanks!", "minutesAgo": 2500 }
+    ]
+  },
+  {
+    "id": "c_marco",
+    "platform": "instagram",
+    "contact": { "id": "u_marco", "name": "Marco Silva", "handle": "marco.eats", "followers": 9400, "verified": false, "avatarHue": 30, "location": "Lisbon", "firstSeenDaysAgo": 700 },
+    "intent": "fan_message",
+    "sentiment": "positive",
+    "status": "resolved",
+    "handledBy": "ai",
+    "unread": false,
+    "messages": [
+      { "author": "contact", "body": "Been following since 10k, so proud of you hitting 300k!! 🎉", "minutesAgo": 4300 },
+      { "author": "ai", "body": "Marco!! You've been here since the very beginning — thank you, truly 🙏\n\n— Maya", "minutesAgo": 4280 }
+    ]
+  }
+]

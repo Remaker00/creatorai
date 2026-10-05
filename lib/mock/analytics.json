@@ -1,0 +1,349 @@
+{
+  "daily": [
+    {
+      "daysAgo": 29,
+      "messagesReceived": 200,
+      "aiReplies": 133,
+      "manualReplies": 41,
+      "avgResponseMinutes": 14.6
+    },
+    {
+      "daysAgo": 28,
+      "messagesReceived": 246,
+      "aiReplies": 160,
+      "manualReplies": 53,
+      "avgResponseMinutes": 16
+    },
+    {
+      "daysAgo": 27,
+      "messagesReceived": 250,
+      "aiReplies": 164,
+      "manualReplies": 59,
+      "avgResponseMinutes": 15.3
+    },
+    {
+      "daysAgo": 26,
+      "messagesReceived": 256,
+      "aiReplies": 165,
+      "manualReplies": 57,
+      "avgResponseMinutes": 15.2
+    },
+    {
+      "daysAgo": 25,
+      "messagesReceived": 314,
+      "aiReplies": 201,
+      "manualReplies": 78,
+      "avgResponseMinutes": 14.2
+    },
+    {
+      "daysAgo": 24,
+      "messagesReceived": 331,
+      "aiReplies": 225,
+      "manualReplies": 61,
+      "avgResponseMinutes": 14
+    },
+    {
+      "daysAgo": 23,
+      "messagesReceived": 270,
+      "aiReplies": 183,
+      "manualReplies": 59,
+      "avgResponseMinutes": 13.9
+    },
+    {
+      "daysAgo": 22,
+      "messagesReceived": 272,
+      "aiReplies": 189,
+      "manualReplies": 52,
+      "avgResponseMinutes": 12.9
+    },
+    {
+      "daysAgo": 21,
+      "messagesReceived": 269,
+      "aiReplies": 180,
+      "manualReplies": 52,
+      "avgResponseMinutes": 12.5
+    },
+    {
+      "daysAgo": 20,
+      "messagesReceived": 247,
+      "aiReplies": 166,
+      "manualReplies": 60,
+      "avgResponseMinutes": 13
+    },
+    {
+      "daysAgo": 19,
+      "messagesReceived": 268,
+      "aiReplies": 189,
+      "manualReplies": 44,
+      "avgResponseMinutes": 11.8
+    },
+    {
+      "daysAgo": 18,
+      "messagesReceived": 328,
+      "aiReplies": 226,
+      "manualReplies": 65,
+      "avgResponseMinutes": 11.3
+    },
+    {
+      "daysAgo": 17,
+      "messagesReceived": 352,
+      "aiReplies": 236,
+      "manualReplies": 72,
+      "avgResponseMinutes": 11.4
+    },
+    {
+      "daysAgo": 16,
+      "messagesReceived": 271,
+      "aiReplies": 195,
+      "manualReplies": 50,
+      "avgResponseMinutes": 10.6
+    },
+    {
+      "daysAgo": 15,
+      "messagesReceived": 258,
+      "aiReplies": 178,
+      "manualReplies": 50,
+      "avgResponseMinutes": 11.1
+    },
+    {
+      "daysAgo": 14,
+      "messagesReceived": 256,
+      "aiReplies": 181,
+      "manualReplies": 50,
+      "avgResponseMinutes": 10.2
+    },
+    {
+      "daysAgo": 13,
+      "messagesReceived": 293,
+      "aiReplies": 207,
+      "manualReplies": 62,
+      "avgResponseMinutes": 11.1
+    },
+    {
+      "daysAgo": 12,
+      "messagesReceived": 279,
+      "aiReplies": 199,
+      "manualReplies": 52,
+      "avgResponseMinutes": 11
+    },
+    {
+      "daysAgo": 11,
+      "messagesReceived": 373,
+      "aiReplies": 266,
+      "manualReplies": 74,
+      "avgResponseMinutes": 9.4
+    },
+    {
+      "daysAgo": 10,
+      "messagesReceived": 354,
+      "aiReplies": 253,
+      "manualReplies": 62,
+      "avgResponseMinutes": 9.5
+    },
+    {
+      "daysAgo": 9,
+      "messagesReceived": 296,
+      "aiReplies": 220,
+      "manualReplies": 43,
+      "avgResponseMinutes": 10.5
+    },
+    {
+      "daysAgo": 8,
+      "messagesReceived": 255,
+      "aiReplies": 185,
+      "manualReplies": 41,
+      "avgResponseMinutes": 7.9
+    },
+    {
+      "daysAgo": 7,
+      "messagesReceived": 313,
+      "aiReplies": 225,
+      "manualReplies": 60,
+      "avgResponseMinutes": 7.8
+    },
+    {
+      "daysAgo": 6,
+      "messagesReceived": 283,
+      "aiReplies": 210,
+      "manualReplies": 42,
+      "avgResponseMinutes": 9.9
+    },
+    {
+      "daysAgo": 5,
+      "messagesReceived": 311,
+      "aiReplies": 237,
+      "manualReplies": 54,
+      "avgResponseMinutes": 9.5
+    },
+    {
+      "daysAgo": 4,
+      "messagesReceived": 384,
+      "aiReplies": 282,
+      "manualReplies": 56,
+      "avgResponseMinutes": 7.2
+    },
+    {
+      "daysAgo": 3,
+      "messagesReceived": 346,
+      "aiReplies": 251,
+      "manualReplies": 64,
+      "avgResponseMinutes": 6.9
+    },
+    {
+      "daysAgo": 2,
+      "messagesReceived": 309,
+      "aiReplies": 233,
+      "manualReplies": 52,
+      "avgResponseMinutes": 6.6
+    },
+    {
+      "daysAgo": 1,
+      "messagesReceived": 320,
+      "aiReplies": 238,
+      "manualReplies": 51,
+      "avgResponseMinutes": 8.3
+    },
+    {
+      "daysAgo": 0,
+      "messagesReceived": 334,
+      "aiReplies": 251,
+      "manualReplies": 49,
+      "avgResponseMinutes": 4.6
+    }
+  ],
+  "intents": [
+    {
+      "intent": "fan_message",
+      "count": 2410
+    },
+    {
+      "intent": "product_question",
+      "count": 1630
+    },
+    {
+      "intent": "general",
+      "count": 880
+    },
+    {
+      "intent": "collaboration",
+      "count": 342
+    },
+    {
+      "intent": "spam",
+      "count": 296
+    },
+    {
+      "intent": "shipping",
+      "count": 131
+    },
+    {
+      "intent": "pricing",
+      "count": 118
+    },
+    {
+      "intent": "complaint",
+      "count": 64
+    }
+  ],
+  "hourly": [
+    {
+      "hour": 0,
+      "messages": 5
+    },
+    {
+      "hour": 1,
+      "messages": 6
+    },
+    {
+      "hour": 2,
+      "messages": 4
+    },
+    {
+      "hour": 3,
+      "messages": 9
+    },
+    {
+      "hour": 4,
+      "messages": 7
+    },
+    {
+      "hour": 5,
+      "messages": 9
+    },
+    {
+      "hour": 6,
+      "messages": 4
+    },
+    {
+      "hour": 7,
+      "messages": 9
+    },
+    {
+      "hour": 8,
+      "messages": 6
+    },
+    {
+      "hour": 9,
+      "messages": 13
+    },
+    {
+      "hour": 10,
+      "messages": 16
+    },
+    {
+      "hour": 11,
+      "messages": 23
+    },
+    {
+      "hour": 12,
+      "messages": 24
+    },
+    {
+      "hour": 13,
+      "messages": 21
+    },
+    {
+      "hour": 14,
+      "messages": 17
+    },
+    {
+      "hour": 15,
+      "messages": 16
+    },
+    {
+      "hour": 16,
+      "messages": 16
+    },
+    {
+      "hour": 17,
+      "messages": 27
+    },
+    {
+      "hour": 18,
+      "messages": 36
+    },
+    {
+      "hour": 19,
+      "messages": 44
+    },
+    {
+      "hour": 20,
+      "messages": 46
+    },
+    {
+      "hour": 21,
+      "messages": 41
+    },
+    {
+      "hour": 22,
+      "messages": 33
+    },
+    {
+      "hour": 23,
+      "messages": 28
+    }
+  ],
+  "aiAcceptanceRate": 91.4,
+  "csatScore": 4.8,
+  "timeSavedHours": 63
+}

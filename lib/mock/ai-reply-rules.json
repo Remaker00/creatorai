@@ -1,0 +1,151 @@
+{
+  "greetings": {
+    "friendly": ["Hey {firstName}!", "Hi {firstName}!"],
+    "professional": ["Hi {firstName},", "Hello {firstName},"],
+    "playful": ["{firstName}!!", "Heyyy {firstName}!"],
+    "concise": ["Hi {firstName} —", "{firstName} —"]
+  },
+  "closers": {
+    "friendly": "Let me know if anything else comes up!",
+    "professional": "Please don't hesitate to reach out if you have any other questions.",
+    "playful": "Shout if you need anything else!",
+    "concise": ""
+  },
+  "toneEmoji": {
+    "friendly": "✨",
+    "professional": "",
+    "playful": "🙌",
+    "concise": ""
+  },
+  "defaultThreshold": 75,
+  "avoidTopicSynonyms": {
+    "politics": ["politic", "election", "vote", "president", "government"],
+    "personal relationships": ["boyfriend", "girlfriend", "dating", "married", "single"],
+    "exact earnings": ["how much do you make", "how much you make", "income", "salary", "earn"],
+    "medical advice": ["doctor", "medication", "diagnos", "symptom"]
+  },
+  "avoidTopicReply": {
+    "dm": "Thanks for the kind words about my work! I keep this space focused on photography and travel, so I don't really get into {topic} here — but I appreciate you asking.",
+    "comment": "Thanks! I keep things focused on photography here 📷"
+  },
+  "intents": [
+    {
+      "intent": "collaboration",
+      "label": "Collaboration",
+      "keywords": ["collab", "partnership", "partner", "sponsor", "brand", "send you", "campaign", "ambassador", "photo walk"],
+      "baseConfidence": 0.9,
+      "reviewRuleHints": [],
+      "relevantRuleHints": ["collab", "brand"],
+      "dm": [
+        { "body": "Thanks so much for reaching out — I'd love to hear more about what you have in mind.", "detail": "All my partnerships go through {businessEmail}, so if you send the brief, timeline and deliverables there, we'll get back to you within 2 business days." },
+        { "body": "Really appreciate you thinking of me for this!", "detail": "Could you email the details to {businessEmail}? That way it lands with my team and we can review it properly." }
+      ],
+      "comment": [{ "body": "Love this idea — send the details to {businessEmail}!" }]
+    },
+    {
+      "intent": "pricing",
+      "label": "Pricing",
+      "keywords": ["rate", "charge", "price", "pricing", "budget", "cost", "how much"],
+      "baseConfidence": 0.84,
+      "reviewRuleHints": [],
+      "relevantRuleHints": ["rate", "brand"],
+      "dm": [
+        { "body": "Thanks for your interest in working together!", "detail": "I don't share rates over DM, but if you email {businessEmail} with the deliverables and timing, we'll send over the rate card and media kit." },
+        { "body": "Appreciate you reaching out about a campaign.", "detail": "Rates depend on scope and usage rights — drop the brief at {businessEmail} and we'll come back with a tailored quote." }
+      ],
+      "comment": [{ "body": "All pricing is on {website} — link in bio!" }]
+    },
+    {
+      "intent": "product_question",
+      "label": "Product question",
+      "keywords": ["preset", "presets", "course", "lightroom", "mobile", "beginner", "access", "tripod", "settings", "lens", "camera", "sale"],
+      "baseConfidence": 0.78,
+      "reviewRuleHints": [],
+      "relevantRuleHints": ["comment"],
+      "dm": [
+        { "keywords": ["mobile", "phone", "lightroom"], "confidence": 0.94, "body": "Yes — every preset pack includes both desktop (.xmp) and mobile (.dng) versions, so they work great in Lightroom Mobile.", "detail": "There's a quick install guide in the download, and everything is on {website}." },
+        { "keywords": ["lifetime", "access", "own pace", "slowly"], "confidence": 0.93, "body": "Yes! Light & Story comes with lifetime access, including all future updates, so you can take it completely at your own pace.", "detail": "There's also a 30-day refund if it turns out not to be the right fit. Full details are at {website}/course." },
+        { "keywords": ["beginner", "first camera"], "confidence": 0.9, "body": "Absolutely — Light & Story starts from the basics of exposure before getting into composition and storytelling.", "detail": "Lots of students start with their very first camera. Details are at {website}/course." },
+        { "body": "Great question!", "detail": "You'll find all the details at {website} — and if anything's unclear, just reply here and I'll help." }
+      ],
+      "comment": [
+        { "keywords": ["mobile", "phone"], "confidence": 0.94, "body": "Yes! Every pack includes mobile versions 📱" },
+        { "keywords": ["settings", "sunrise"], "confidence": 0.86, "body": "f/11, 1/125s, ISO 100 with a soft grad filter!" },
+        { "keywords": ["tripod"], "confidence": 0.9, "body": "It's the Peak Design travel tripod — super light and packs tiny!" },
+        { "keywords": ["course", "sale"], "confidence": 0.82, "body": "The course link is in my bio — lifetime access included!" },
+        { "keywords": ["edited with"], "confidence": 0.9, "body": "Yes! This one is edited with my presets ✨" },
+        { "keywords": ["preset", "bought"], "confidence": 0.88, "body": "So happy you're loving them! Tag me in your edits ✨" },
+        { "body": "Great question — all the details are on {website}!" }
+      ]
+    },
+    {
+      "intent": "shipping",
+      "label": "Order / shipping",
+      "keywords": ["order", "tracking", "shipping", "delivery", "arrived", "lost", "package"],
+      "baseConfidence": 0.8,
+      "reviewRuleHints": ["lost order", "orders", "refund"],
+      "relevantRuleHints": ["order", "refund"],
+      "dm": [
+        { "body": "I'm really sorry your order hasn't arrived yet — I know how stressful that is, especially for a gift.", "detail": "I've passed your order number to our fulfilment team and someone will check the tracking and get back to you within 24 hours." },
+        { "body": "So sorry about the delay with your order.", "detail": "Could you confirm the email you used at checkout? Our team will look into the shipment and update you today." }
+      ],
+      "comment": [{ "body": "So sorry! Please DM us your order number and we'll sort it right away." }]
+    },
+    {
+      "intent": "complaint",
+      "label": "Complaint",
+      "keywords": ["broken", "refund", "frustrating", "can't", "doesn't work", "expired", "not working"],
+      "baseConfidence": 0.7,
+      "reviewRuleHints": ["refund", "broken"],
+      "relevantRuleHints": ["refund", "broken"],
+      "dm": [
+        { "body": "I'm so sorry about this — that's definitely not okay.", "detail": "I've flagged it to the team and we'll email you a fresh download link shortly. Thanks for your patience." },
+        { "body": "Really sorry for the hassle with your download.", "detail": "Could you share the email you purchased with? We'll resend the files right away." }
+      ],
+      "comment": [{ "body": "So sorry! DM us your order email and we'll send a new link right away." }]
+    },
+    {
+      "intent": "fan_message",
+      "label": "Fan message",
+      "keywords": ["love", "inspo", "inspired", "thank", "proud", "amazing", "unreal", "best", "🔥", "made me"],
+      "baseConfidence": 0.95,
+      "reviewRuleHints": [],
+      "relevantRuleHints": [],
+      "dm": [
+        { "body": "This honestly made my day, thank you!", "detail": "Messages like this are the reason I keep making things." },
+        { "body": "Thank you so much — that means a lot.", "detail": "Really glad the work resonates with you." }
+      ],
+      "comment": [
+        { "body": "Thank you so much, means a lot!" },
+        { "body": "This made my day 🥹" }
+      ]
+    },
+    {
+      "intent": "spam",
+      "label": "Spam",
+      "keywords": ["followers", "promo", "promote", "crypto", "guaranteed", "dm for prices", "check bio"],
+      "baseConfidence": 0.97,
+      "reviewRuleHints": [],
+      "relevantRuleHints": ["spam"],
+      "noReply": true,
+      "dm": [{ "body": "Thanks, but I'm not interested." }],
+      "comment": [{ "body": "" }]
+    },
+    {
+      "intent": "general",
+      "label": "General",
+      "keywords": ["where", "what", "how", "?"],
+      "baseConfidence": 0.72,
+      "reviewRuleHints": [],
+      "relevantRuleHints": [],
+      "dm": [
+        { "body": "Thanks for the message!", "detail": "I try to answer everything here, and there's more behind-the-scenes on {website}." }
+      ],
+      "comment": [
+        { "keywords": ["where"], "confidence": 0.88, "body": "This is near Reine in Lofoten, Norway! Go at sunrise 🌄" },
+        { "keywords": ["cold"], "confidence": 0.85, "body": "Freezing! Hand warmers are a must 😂" },
+        { "body": "Thank you for watching!" }
+      ]
+    }
+  ]
+}
