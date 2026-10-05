@@ -5,19 +5,31 @@ import * as schema from "./schema";
 export type Database = NodePgDatabase<typeof schema>;
 
 // Reuse one pool across dev hot reloads instead of opening a new one per module evaluation.
-const globalForDb = globalThis as unknown as { creatoraiPool?: Pool };
+const globalForDb = globalThis as unknown as { creatoraiPool?: Pool; creatoraiDb?: Database };
 
-function createPool(): Pool {
+function getDb(): Database {
+  if (globalForDb.creatoraiDb) return globalForDb.creatoraiDb;
   const connectionString = process.env.DATABASE_URL;
   if (!connectionString) throw new Error("DATABASE_URL is not set. Copy .env.example to .env.");
-  return new Pool({ connectionString, max: 10 });
+  globalForDb.creatoraiPool ??= new Pool({ connectionString, max: 10 });
+  return (globalForDb.creatoraiDb = drizzle(globalForDb.creatoraiPool, { schema }));
 }
 
-const pool = (globalForDb.creatoraiPool ??= createPool());
+/**
+ * Connects lazily on first use. `next build` imports every route module to collect its
+ * config, so creating the pool at import time would make builds require a database.
+ */
+export const db: Database = new Proxy({} as Database, {
+  get(_target, prop) {
+    const real = getDb();
+    const value: unknown = Reflect.get(real, prop, real);
+    return typeof value === "function" ? value.bind(real) : value;
+  },
+});
 
-export const db: Database = drizzle(pool, { schema });
-
-export function closeDb(): Promise<void> {
+export async function closeDb(): Promise<void> {
+  const pool = globalForDb.creatoraiPool;
   globalForDb.creatoraiPool = undefined;
-  return pool.end();
+  globalForDb.creatoraiDb = undefined;
+  await pool?.end();
 }
