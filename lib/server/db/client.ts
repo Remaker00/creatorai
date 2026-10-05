@@ -1,8 +1,12 @@
+import { setDefaultAutoSelectFamilyAttemptTimeout } from "node:net";
 import { drizzle, type NodePgDatabase } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import * as schema from "./schema";
 
 export type Database = NodePgDatabase<typeof schema>;
+
+// See drizzle.config.ts: Node's 250ms per-address connect budget is too short for distant hosted DBs.
+setDefaultAutoSelectFamilyAttemptTimeout(2000);
 
 // Reuse one pool across dev hot reloads instead of opening a new one per module evaluation.
 const globalForDb = globalThis as unknown as { creatoraiPool?: Pool; creatoraiDb?: Database };
