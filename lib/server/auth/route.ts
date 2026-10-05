@@ -1,5 +1,5 @@
 import { authServerService, type AuthContext } from "@/lib/server/services/auth-service";
-import { errorResponse, HttpError } from "@/lib/server/http";
+import { errorResponse, HttpError, logServerError } from "@/lib/server/http";
 import { getAuth, setSessionCookie, readSessionToken } from "./session";
 
 const SAFE_METHODS = new Set(["GET", "HEAD", "OPTIONS"]);
@@ -21,7 +21,7 @@ function assertSameOrigin(request: Request): void {
 
 function toErrorResponse(error: unknown): Response {
   if (error instanceof HttpError) return errorResponse(error.status, error.message, error.field);
-  console.error(error);
+  logServerError("api", error);
   return errorResponse(500, "Something went wrong");
 }
 

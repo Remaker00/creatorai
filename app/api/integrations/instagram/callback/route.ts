@@ -7,6 +7,7 @@ import {
   oauthStateCookieOptions,
   statesMatch,
 } from "@/lib/server/integrations/instagram/oauth-state";
+import { logServerError } from "@/lib/server/http";
 import { accountServerService } from "@/lib/server/services/account-service";
 
 /**
@@ -33,7 +34,7 @@ export async function GET(request: NextRequest) {
     const profile = await instagramProvider.exchangeCode({ code, redirectUri: new URL(CALLBACK_PATH, request.url).toString() });
     await accountServerService.connectInstagram(auth.state.workspace.id, profile);
   } catch (error) {
-    if (!(error instanceof Error && error.message === "invalid_code")) console.error(error);
+    if (!(error instanceof Error && error.message === "invalid_code")) logServerError("instagram-callback", error);
     return back("error=connect");
   }
   return back("connected=1");

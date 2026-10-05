@@ -27,3 +27,23 @@ export async function readJsonObject(request: Request): Promise<Record<string, u
   if (typeof body !== "object" || body === null || Array.isArray(body)) throw new HttpError(400, "Invalid JSON body");
   return body as Record<string, unknown>;
 }
+
+/**
+ * Logs a server error without query parameters. Drizzle's query errors carry `params`
+ * (password hashes, emails, tokens), so only the SQL text, pg code/message and stack are kept.
+ */
+export function logServerError(context: string, error: unknown): void {
+  const chain: Record<string, unknown>[] = [];
+  for (let e: unknown = error; e instanceof Error && chain.length < 5; e = e.cause) {
+    const { code, query } = e as { code?: unknown; query?: unknown };
+    chain.push({
+      name: e.name,
+      message: e.message.split("\nparams:")[0],
+      code,
+      query,
+      // The stack starts by repeating the message (params included), so keep frame lines only.
+      stack: e.stack?.split("\n").filter((line) => line.trimStart().startsWith("at ")).slice(0, 5).join("\n"),
+    });
+  }
+  console.error(`[${context}]`, chain.length ? chain : String(error));
+}
