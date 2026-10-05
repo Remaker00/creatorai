@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   Link2,
   Lock,
+  Sparkles,
   MessageCircle,
   SlidersHorizontal,
   type LucideIcon,
@@ -16,7 +17,8 @@ import {
 import { UserMenu } from "@/components/account/user-menu";
 import { PlatformIcon } from "@/components/platform-icon";
 import { Avatar } from "@/components/ui/avatar";
-import { LogoMark } from "./logo";
+import { Logo } from "./logo";
+import { lockReason, type Feature } from "@/lib/feature-access";
 import { useWorkspace } from "@/lib/store/workspace";
 import type { AuthState } from "@/lib/types";
 import { cn, formatCompact } from "@/lib/utils";
@@ -25,7 +27,9 @@ interface NavItem {
   href: string;
   label: string;
   icon: LucideIcon;
+  feature: Feature;
   count?: number;
+  locked?: boolean;
 }
 
 function NavLink({ item, active, onNavigate }: { item: NavItem; active: boolean; onNavigate?: () => void }) {
@@ -41,11 +45,16 @@ function NavLink({ item, active, onNavigate }: { item: NavItem; active: boolean;
       )}
     >
       <Icon className={cn("size-4", active ? "text-accent-strong" : "text-fg-subtle group-hover:text-fg-muted")} />
-      <span className="flex-1">{item.label}</span>
-      {item.count !== undefined && item.count > 0 && (
-        <span className="rounded-md bg-surface-3 px-1.5 text-[11px] text-fg-muted tabular-nums ring-1 ring-line-strong">
-          {item.count}
-        </span>
+      <span className={cn("flex-1", item.locked && !active && "text-fg-subtle")}>{item.label}</span>
+      {item.locked ? (
+        <Lock className="size-3.5 text-fg-subtle" aria-label="Locked" />
+      ) : (
+        item.count !== undefined &&
+        item.count > 0 && (
+          <span className="rounded-md bg-surface-3 px-1.5 text-[11px] text-fg-muted tabular-nums ring-1 ring-line-strong">
+            {item.count}
+          </span>
+        )
       )}
     </Link>
   );
@@ -60,30 +69,38 @@ export function Sidebar({ auth, onNavigate }: { auth: AuthState; onNavigate?: ()
   const activeAutomations = automations.items.filter((a) => a.enabled).length;
   const account = accounts.items[0];
 
-  const primary: NavItem[] = [
-    { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-    auth.workspace.instagramConnected
-      ? { href: "/inbox", label: "Inbox", icon: Inbox, count: unread }
-      : { href: "/onboarding", label: "Inbox", icon: Lock },
-    { href: "/comments", label: "Comments", icon: MessageCircle, count: pendingComments },
-    { href: "/automations", label: "Automations", icon: Bot },
-    { href: "/analytics", label: "Analytics", icon: BarChart3 },
-  ];
-  const configure: NavItem[] = [
-    { href: "/ai-settings", label: "AI Settings", icon: SlidersHorizontal },
-    { href: "/accounts", label: "Connected Accounts", icon: Link2 },
-  ];
+  const { workspace } = auth;
+  const withLock = (items: NavItem[]) =>
+    items.map((item) => ({ ...item, locked: lockReason(workspace, item.feature) !== null }));
+  const primary = withLock([
+    { href: "/dashboard", label: "Overview", icon: LayoutDashboard, feature: "overview" },
+    { href: "/inbox", label: "Inbox", icon: Inbox, feature: "inbox", count: unread },
+    { href: "/comments", label: "Comments", icon: MessageCircle, feature: "comments", count: pendingComments },
+    { href: "/automations", label: "Automations", icon: Bot, feature: "automations" },
+    { href: "/analytics", label: "Analytics", icon: BarChart3, feature: "analytics" },
+  ]);
+  const configure = withLock([
+    { href: "/ai-settings", label: "AI Settings", icon: SlidersHorizontal, feature: "aiSettings" },
+    { href: "/accounts", label: "Connected Accounts", icon: Link2, feature: "accounts" },
+  ]);
+  // Bottom card: next setup step until everything is unlocked.
+  const setup = !workspace.plan
+    ? { href: "/pricing", title: "Unlock CreatorAI", body: "Choose a plan to activate the dashboard." }
+    : !workspace.instagramConnected
+      ? { href: "/onboarding", title: "Connect Instagram", body: "Link your account to unlock the Inbox." }
+      : null;
 
   const isActive = (href: string) => pathname.startsWith(href);
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex h-14 items-center gap-2.5 px-4">
-        <LogoMark />
-        <span className="text-[15px] font-semibold tracking-tight">CreatorAI</span>
+      <div className="flex h-14 items-center px-4">
+        <Link href="/" onClick={onNavigate} aria-label="CreatorAI home">
+          <Logo />
+        </Link>
       </div>
 
-      {account && (
+      {account && workspace.instagramConnected && (
         <div className="mx-3 mb-3 flex items-center gap-2.5 rounded-lg border border-line bg-surface-2/60 px-2.5 py-2">
           <Avatar name={account.displayName} hue={account.avatarHue} size="sm" />
           <div className="min-w-0 flex-1">
@@ -113,22 +130,37 @@ export function Sidebar({ auth, onNavigate }: { auth: AuthState; onNavigate?: ()
       </nav>
 
       <div className="space-y-3 p-3">
-        <Link
-          href="/automations"
-          onClick={onNavigate}
-          className="block rounded-xl border border-accent/20 bg-accent-soft/60 p-3 transition-colors hover:border-accent/35"
-        >
-          <p className="flex items-center gap-2 text-xs font-medium text-fg">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
-              <span className="relative inline-flex size-2 rounded-full bg-accent" />
-            </span>
-            AI assistant active
-          </p>
-          <p className="mt-1 text-[11px] text-fg-muted">
-            {automations.loaded ? `${activeAutomations} automations running` : "Loading automations…"}
-          </p>
-        </Link>
+        {setup ? (
+          <Link
+            href={setup.href}
+            onClick={onNavigate}
+            className="block rounded-xl border border-accent/30 bg-accent-soft p-3 transition-colors hover:border-accent/50"
+          >
+            <p className="flex items-center gap-2 text-xs font-medium text-fg">
+              <Sparkles className="size-3.5 text-accent-strong" />
+              {setup.title}
+            </p>
+            <p className="mt-1 text-[11px] text-fg-muted">{setup.body}</p>
+            <p className="mt-2 text-[11px] font-medium text-accent-strong">Continue setup →</p>
+          </Link>
+        ) : (
+          <Link
+            href="/automations"
+            onClick={onNavigate}
+            className="block rounded-xl border border-accent/20 bg-accent-soft/60 p-3 transition-colors hover:border-accent/35"
+          >
+            <p className="flex items-center gap-2 text-xs font-medium text-fg">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
+                <span className="relative inline-flex size-2 rounded-full bg-accent" />
+              </span>
+              AI assistant active
+            </p>
+            <p className="mt-1 text-[11px] text-fg-muted">
+              {automations.loaded ? `${activeAutomations} automations running` : "Loading automations…"}
+            </p>
+          </Link>
+        )}
         <UserMenu auth={auth} variant="sidebar" />
       </div>
     </div>

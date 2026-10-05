@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowRight, CircleCheck, Inbox } from "lucide-react";
 import { FormError } from "@/components/auth/auth-card";
 import { SetupSteps } from "@/components/auth/setup-steps";
 import { PlanCard } from "@/components/marketing/plan-card";
 import { PlatformIcon } from "@/components/platform-icon";
+import { Logo } from "@/components/shell/logo";
 import { Badge } from "@/components/ui/badge";
 import { buttonClasses, ButtonLink } from "@/components/ui/button";
 import { plans } from "@/lib/plans";
@@ -64,6 +66,9 @@ export default async function OnboardingPage({ searchParams }: PageProps<"/onboa
 
   return (
     <>
+      <Link href="/" aria-label="CreatorAI home" className="mb-6 flex justify-center">
+        <Logo />
+      </Link>
       <SetupSteps current={workspace.instagramConnected ? 3 : 2} />
       <PlanCard plan={plan} current action={instagram} />
     </>

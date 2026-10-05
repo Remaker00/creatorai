@@ -55,6 +55,10 @@ export const sessionRepository = {
     await db.delete(sessions).where(eq(sessions.id, id));
   },
 
+  async deleteAllForUser(userId: string, ex: Executor = db): Promise<void> {
+    await ex.delete(sessions).where(eq(sessions.userId, userId));
+  },
+
   async deleteExpiredForUser(userId: string, now: Date): Promise<void> {
     await db.delete(sessions).where(and(eq(sessions.userId, userId), lt(sessions.expiresAt, now)));
   },

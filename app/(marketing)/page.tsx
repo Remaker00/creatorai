@@ -1,16 +1,83 @@
-import { ArrowRight, BarChart3, Bot, Inbox, MessageCircle, Sparkles } from "lucide-react";
-import { PlatformIcon } from "@/components/platform-icon";
-import { Avatar } from "@/components/ui/avatar";
+import {
+  ArrowRight,
+  Bot,
+  Gauge,
+  HandCoins,
+  Heart,
+  Inbox,
+  MessageCircle,
+  Package,
+  ShieldCheck,
+  Sparkles,
+  Trash2,
+} from "lucide-react";
+import { AnimatedInboxPreview } from "@/components/marketing/animated-inbox-preview";
+import { CtaBand, Section, SectionHeading, StartNowButton } from "@/components/marketing/sections";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-const features = [
-  { icon: Inbox, title: "One inbox for every DM", body: "Collabs, questions and fan mail are sorted by intent so you know what needs you." },
-  { icon: Sparkles, title: "Replies in your voice", body: "AI drafts answers using your tone, knowledge and rules. Send, edit or regenerate." },
-  { icon: MessageCircle, title: "Comments handled", body: "Bulk-draft replies to comments on posts and Reels, then approve in one click." },
-  { icon: Bot, title: "Automations you control", body: "Confidence thresholds decide what is sent automatically and what waits for review." },
-  { icon: BarChart3, title: "See the time you save", body: "Track response times, AI acceptance and what your audience asks about most." },
+const highlights = [
+  {
+    icon: Inbox,
+    title: "One inbox for every DM",
+    body: "Collabs, questions and fan mail are sorted by intent so you know what needs you.",
+  },
+  {
+    icon: Sparkles,
+    title: "Replies in your voice",
+    body: "AI drafts answers using your tone, knowledge and rules. Send, edit or regenerate.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Comments handled",
+    body: "Bulk-draft replies to comments on posts and Reels, then approve in one click.",
+  },
+];
+
+const messageTypes = [
+  {
+    icon: HandCoins,
+    intent: "Brand deals",
+    example: "“What are your rates for a Reel?”",
+    action: "Drafts a professional reply and flags it for your review.",
+  },
+  {
+    icon: Package,
+    intent: "Product questions",
+    example: "“Does the preset pack work on mobile?”",
+    action: "Answers from your knowledge base, in your tone.",
+  },
+  {
+    icon: Heart,
+    intent: "Fan love",
+    example: "“Your last video made my week!”",
+    action: "Sends a warm thank-you automatically, if you allow it.",
+  },
+  {
+    icon: Trash2,
+    intent: "Spam",
+    example: "“Promote your page for $5!!”",
+    action: "Recognised and left unanswered — no wasted time.",
+  },
+];
+
+const controls = [
+  {
+    icon: Gauge,
+    title: "Confidence thresholds",
+    body: "Only replies above your threshold are sent automatically. Everything else waits for you.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Topics to avoid",
+    body: "Pricing, personal info or anything else you list is always deflected or flagged.",
+  },
+  {
+    icon: Bot,
+    title: "Rules you write",
+    body: "“Always review brand deals.” Plain-language rules the AI follows every time.",
+  },
 ];
 
 const steps = [
@@ -19,29 +86,32 @@ const steps = [
   { title: "Let AI help", body: "Review drafts in your Inbox and turn on automations." },
 ];
 
-function InboxPreview() {
+function ThresholdCard() {
   return (
-    <Card className="ai-glow overflow-hidden text-left" aria-hidden>
-      <div className="flex items-center gap-2 border-b border-line px-4 py-3">
-        <Avatar name="Jordan Lee" hue={24} size="sm" />
-        <div className="min-w-0 flex-1">
-          <p className="text-xs font-medium">Jordan Lee</p>
-          <p className="flex items-center gap-1 text-[11px] text-fg-subtle">
-            <PlatformIcon platform="instagram" className="size-3" /> Direct message
-          </p>
+    <Card className="ai-glow p-5" aria-hidden>
+      <p className="text-sm font-medium">Fan messages automation</p>
+      <p className="mt-0.5 text-xs text-fg-subtle">Send automatically when the AI is confident</p>
+      <div className="mt-5">
+        <div className="flex justify-between text-xs text-fg-muted">
+          <span>Confidence threshold</span>
+          <span className="font-medium text-fg tabular-nums">85%</span>
         </div>
-        <Badge tone="accent">Collaboration</Badge>
+        <div className="relative mt-2 h-2 rounded-full bg-surface-3">
+          <div className="h-full w-[85%] rounded-full bg-accent" />
+          <span className="absolute top-1/2 left-[85%] size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-accent bg-surface shadow" />
+        </div>
       </div>
-      <div className="space-y-3 p-4 text-sm">
-        <p className="max-w-[85%] rounded-2xl rounded-bl-md bg-surface-3 px-3 py-2">
-          Hi! We&apos;d love to send you our new camera bag for a review. Are you open to collabs?
-        </p>
-        <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-md border border-accent/30 bg-accent-soft px-3 py-2">
-          <p className="mb-1 flex items-center gap-1 text-[11px] font-medium text-accent-strong">
-            <Sparkles className="size-3" /> AI draft · 94% confident
-          </p>
-          Thanks Jordan! I&apos;m open to it. Could you share the brief and timeline? I&apos;ll get back to you this week.
-        </div>
+      <div className="mt-5 space-y-2 text-xs">
+        {[
+          { label: "“Love this!!” · 97%", tone: "success" as const, status: "Sent" },
+          { label: "“Collab rates?” · 71%", tone: "warning" as const, status: "Needs review" },
+          { label: "“Where do you live?” · avoided", tone: "danger" as const, status: "Held" },
+        ].map((row) => (
+          <div key={row.label} className="flex items-center justify-between rounded-lg bg-surface-2 px-3 py-2">
+            <span className="text-fg-muted">{row.label}</span>
+            <Badge tone={row.tone}>{row.status}</Badge>
+          </div>
+        ))}
       </div>
     </Card>
   );
@@ -50,66 +120,110 @@ function InboxPreview() {
 export default function LandingPage() {
   return (
     <>
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2">
-        <div>
-          <Badge tone="accent">
-            <Sparkles /> AI inbox for Instagram creators
-          </Badge>
-          <h1 className="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-            Your DMs and comments, answered in your voice.
-          </h1>
-          <p className="mt-4 max-w-lg text-lg text-fg-muted">
-            CreatorAI drafts replies to every message and comment, so you spend minutes on your inbox instead of hours.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink href="/signup" variant="ai">
-              Start Now <ArrowRight />
-            </ButtonLink>
-            <ButtonLink href="/pricing">See pricing</ButtonLink>
+      <section className="bg-[radial-gradient(ellipse_at_top_left,var(--color-accent-soft),transparent_55%)]">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2">
+          <div>
+            <Badge tone="accent">
+              <Sparkles /> AI inbox for Instagram creators
+            </Badge>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
+              Your DMs and comments, answered in your voice.
+            </h1>
+            <p className="mt-4 max-w-lg text-lg text-fg-muted">
+              CreatorAI drafts replies to every message and comment, so you spend minutes on your inbox instead of
+              hours.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <StartNowButton />
+              <ButtonLink href="/features">See how it works</ButtonLink>
+            </div>
+            <p className="mt-3 text-xs text-fg-subtle">Free plan. No credit card required.</p>
           </div>
-          <p className="mt-3 text-xs text-fg-subtle">Free plan. No credit card required.</p>
-        </div>
-        <InboxPreview />
-      </section>
-
-      <section id="features" className="scroll-mt-16 border-t border-line bg-surface/40">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-          <h2 className="text-2xl font-semibold tracking-tight">Everything your inbox needs</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map(({ icon: Icon, title, body }) => (
-              <Card key={title} className="p-5">
-                <span className="flex size-8 items-center justify-center rounded-lg bg-accent-soft text-accent-strong">
-                  <Icon className="size-4" />
-                </span>
-                <h3 className="mt-3 text-sm font-medium">{title}</h3>
-                <p className="mt-1 text-sm text-fg-muted">{body}</p>
-              </Card>
-            ))}
-          </div>
+          <AnimatedInboxPreview />
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <h2 className="text-2xl font-semibold tracking-tight">Up and running in three steps</h2>
+      <Section className="border-t border-line bg-surface/40">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <SectionHeading eyebrow="Features" title="Everything your inbox needs" />
+          <ButtonLink href="/features" variant="ghost">
+            Explore all features <ArrowRight />
+          </ButtonLink>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {highlights.map(({ icon: Icon, title, body }) => (
+            <Card key={title} className="p-5 transition-transform duration-200 hover:-translate-y-0.5">
+              <span className="flex size-8 items-center justify-center rounded-lg bg-accent-soft text-accent-strong">
+                <Icon className="size-4" />
+              </span>
+              <h3 className="mt-3 text-sm font-medium">{title}</h3>
+              <p className="mt-1 text-sm text-fg-muted">{body}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="Smart triage"
+          title="Every kind of message, handled the right way"
+          body="CreatorAI reads the intent behind each DM and comment, then responds the way you would — or steps aside."
+        />
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {messageTypes.map(({ icon: Icon, intent, example, action }) => (
+            <Card key={intent} className="flex flex-col p-5">
+              <span className="flex items-center gap-2 text-sm font-medium">
+                <Icon className="size-4 text-accent-strong" /> {intent}
+              </span>
+              <p className="mt-3 rounded-xl rounded-bl-sm bg-surface-3 px-3 py-2 text-sm">{example}</p>
+              <p className="mt-3 text-sm text-fg-muted">{action}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="border-y border-line bg-surface/40">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <SectionHeading
+              eyebrow="You stay in control"
+              title="Automation that knows when to ask you"
+              body="Nothing goes out that you wouldn't send yourself. Set the rules once; CreatorAI follows them on every message."
+            />
+            <ul className="mt-8 space-y-5">
+              {controls.map(({ icon: Icon, title, body }) => (
+                <li key={title} className="flex gap-3">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent-strong">
+                    <Icon className="size-4" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-medium">{title}</p>
+                    <p className="text-sm text-fg-muted">{body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <ThresholdCard />
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading eyebrow="Get started" title="Up and running in three steps" />
         <ol className="mt-8 grid gap-4 sm:grid-cols-3">
           {steps.map((step, i) => (
             <li key={step.title} className="rounded-card border border-line p-5">
-              <span className="text-xs font-medium text-accent-strong">Step {i + 1}</span>
-              <p className="mt-1 text-sm font-medium">{step.title}</p>
+              <span className="flex size-7 items-center justify-center rounded-full bg-accent-soft text-xs font-semibold text-accent-strong">
+                {i + 1}
+              </span>
+              <p className="mt-3 text-sm font-medium">{step.title}</p>
               <p className="mt-1 text-sm text-fg-muted">{step.body}</p>
             </li>
           ))}
         </ol>
-        <div className="mt-12 flex flex-col items-start gap-4 rounded-card border border-accent/25 bg-accent-soft/50 p-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="font-medium">Ready to get your evenings back?</p>
-            <p className="text-sm text-fg-muted">Start on the Free plan today.</p>
-          </div>
-          <ButtonLink href="/signup" variant="ai">
-            Start Now <ArrowRight />
-          </ButtonLink>
-        </div>
-      </section>
+      </Section>
+
+      <CtaBand />
     </>
   );
 }

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/field";
-import { nextStepPath } from "@/lib/auth-flow";
 import { authService } from "@/lib/services";
 import { AuthCard, FormError } from "./auth-card";
 import { useSubmit } from "./use-submit";
@@ -19,8 +18,8 @@ export function LoginForm() {
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     void run(async () => {
-      const { workspace } = await authService.login({ email, password });
-      router.replace(nextStepPath(workspace));
+      await authService.login({ email, password });
+      router.replace("/");
       router.refresh();
     });
   }
@@ -52,6 +51,11 @@ export function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Field>
+        <div className="-mt-2 flex justify-end">
+          <Link href="/forgot-password" className="text-xs font-medium text-accent-strong hover:underline">
+            Forgot password?
+          </Link>
+        </div>
         <FormError message={error?.message ?? null} />
         <Button type="submit" variant="primary" className="w-full" loading={pending} disabled={!email || !password}>
           Log in

@@ -20,6 +20,14 @@ export const authService = {
     return apiRequest("GET", "/api/auth/me");
   },
 
+  requestPasswordReset(email: string): Promise<{ ok: true; devResetUrl?: string }> {
+    return apiRequest("POST", "/api/auth/forgot-password", { email });
+  },
+
+  resetPassword(input: { token: string; password: string }): Promise<AuthState> {
+    return apiRequest("POST", "/api/auth/reset-password", input);
+  },
+
   selectPlan(plan: PlanId): Promise<AuthState> {
     return apiRequest("POST", "/api/workspace/plan", { plan });
   },

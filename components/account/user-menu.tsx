@@ -6,7 +6,6 @@ import { ChevronsUpDown, LayoutDashboard, Link2, LogOut, Moon, SlidersHorizontal
 import { ThemeSwitch } from "@/components/theme/theme-toggle";
 import { Avatar } from "@/components/ui/avatar";
 import { Menu, MenuButton, MenuLink, MenuSeparator } from "@/components/ui/menu";
-import { nextStepPath } from "@/lib/auth-flow";
 import { plans } from "@/lib/plans";
 import { authService } from "@/lib/services";
 import type { AuthState } from "@/lib/types";
@@ -77,7 +76,7 @@ export function UserMenu({ auth, variant = "compact" }: UserMenuProps) {
         </div>
       </div>
       <MenuSeparator />
-      <MenuLink href={nextStepPath(workspace)}>
+      <MenuLink href="/dashboard">
         <LayoutDashboard /> Dashboard
       </MenuLink>
       <MenuLink href="/account">

@@ -3,6 +3,8 @@ import { SESSION_RENEW_WITHIN_MS, SESSION_TTL_MS } from "@/lib/server/auth/confi
 import { burnPasswordCheck, hashPassword, verifyPassword } from "@/lib/server/auth/password";
 import { generateId, generateSessionToken, hashSessionToken } from "@/lib/server/auth/tokens";
 import { HttpError } from "@/lib/server/http";
+import { sendEmail } from "@/lib/server/email/mailer";
+import { passwordResetRepository } from "@/lib/server/repositories/password-reset-repository";
 import { sessionRepository } from "@/lib/server/repositories/session-repository";
 import { socialAccountRepository } from "@/lib/server/repositories/social-account-repository";
 import { userRepository, type UserRow } from "@/lib/server/repositories/user-repository";
@@ -44,6 +46,21 @@ function isUniqueViolation(error: unknown): boolean {
   return false;
 }
 
+const RESET_TTL_MS = 30 * 60 * 1000;
+
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch] ?? ch);
+
+/** New session in the user's default workspace. */
+async function startSession(user: UserRow): Promise<IssuedSession> {
+  const membership = await workspaceRepository.findDefaultMembership(user.id);
+  if (!membership) throw new HttpError(403, "This account has no workspace");
+  const instagramConnected = await socialAccountRepository.hasPlatform(membership.workspace.id, "instagram");
+  const { token, id, expiresAt } = newSessionSecrets();
+  await sessionRepository.insert({ id, userId: user.id, workspaceId: membership.workspace.id, expiresAt });
+  return { state: toAuthState(user, membership.workspace, membership.role, instagramConnected), token, expiresAt };
+}
+
 const newSessionSecrets = () => {
   const token = generateSessionToken();
   return { token, id: hashSessionToken(token), expiresAt: new Date(Date.now() + SESSION_TTL_MS) };
@@ -82,18 +99,42 @@ export const authServerService = {
     }
     if (!(await verifyPassword(input.password, user.passwordHash))) throw new HttpError(401, "Invalid email or password");
 
-    const membership = await workspaceRepository.findDefaultMembership(user.id);
-    if (!membership) throw new HttpError(403, "This account has no workspace");
-
-    const instagramConnected = await socialAccountRepository.hasPlatform(membership.workspace.id, "instagram");
     await sessionRepository.deleteExpiredForUser(user.id, new Date());
-    const { token, id, expiresAt } = newSessionSecrets();
-    await sessionRepository.insert({ id, userId: user.id, workspaceId: membership.workspace.id, expiresAt });
-    return {
-      state: toAuthState(user, membership.workspace, membership.role, instagramConnected),
-      token,
-      expiresAt,
-    };
+    return startSession(user);
+  },
+
+  /**
+   * Emails a single-use reset link (30 min). Always succeeds from the caller's view so the
+   * response never reveals whether an account exists. `devResetUrl` is only set outside production.
+   */
+  async requestPasswordReset(email: string, baseUrl: string): Promise<{ devResetUrl?: string }> {
+    const user = await userRepository.findByEmail(email);
+    if (!user) return {};
+
+    const token = generateSessionToken();
+    await passwordResetRepository.replaceForUser(user.id, hashSessionToken(token), new Date(Date.now() + RESET_TTL_MS));
+    const url = `${baseUrl}/reset-password?${new URLSearchParams({ token })}`;
+    await sendEmail({
+      to: user.email,
+      subject: "Reset your CreatorAI password",
+      text: `Hi ${user.name},\n\nReset your password here (valid for 30 minutes):\n${url}\n\nIf you didn't ask for this, ignore this email — your password won't change.`,
+      html: `<p>Hi ${escapeHtml(user.name)},</p><p><a href="${escapeHtml(url)}">Reset your CreatorAI password</a> (valid for 30 minutes).</p><p>If you didn't ask for this, ignore this email — your password won't change.</p>`,
+    });
+    return process.env.NODE_ENV === "production" ? {} : { devResetUrl: url };
+  },
+
+  /** Consumes the link, sets the new password, signs out every other session and signs this browser in. */
+  async resetPassword(token: string, password: string): Promise<IssuedSession> {
+    const passwordHash = await hashPassword(password);
+    const user = await db.transaction(async (tx) => {
+      const row = await passwordResetRepository.consume(hashSessionToken(token), tx);
+      if (!row || row.expiresAt.getTime() <= Date.now()) return null;
+      await userRepository.updatePassword(row.userId, passwordHash, tx);
+      await sessionRepository.deleteAllForUser(row.userId, tx);
+      return userRepository.findById(row.userId, tx);
+    });
+    if (!user) throw new HttpError(400, "This reset link is invalid or has expired. Request a new one.");
+    return startSession(user);
   },
 
   async resolve(token: string): Promise<AuthContext | null> {

@@ -29,6 +29,13 @@
       "when": 1791196491569,
       "tag": "0003_drop_onboarding_flag",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791216263591,
+      "tag": "0004_password_reset",
+      "breakpoints": true
     }
   ]
 }

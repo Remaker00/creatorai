@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/field";
-import { nextStepPath } from "@/lib/auth-flow";
 import { authService } from "@/lib/services";
 import { cn } from "@/lib/utils";
 import { AuthCard, FormError } from "./auth-card";
@@ -21,8 +20,8 @@ export function SignupForm() {
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     void run(async () => {
-      const { workspace } = await authService.signup(form);
-      router.replace(nextStepPath(workspace));
+      await authService.signup(form);
+      router.replace("/");
       router.refresh();
     });
   }

@@ -2,7 +2,17 @@ import { NextResponse, type NextRequest } from "next/server";
 import { SESSION_COOKIE } from "@/lib/server/auth/config";
 
 // Marketing + auth pages. Everything else (dashboard, onboarding, inbox…) needs a session.
-const PUBLIC_PATHS = new Set(["/", "/pricing", "/login", "/signup", "/debounce-demo"]);
+const PUBLIC_PATHS = new Set([
+  "/",
+  "/features",
+  "/pricing",
+  "/about",
+  "/login",
+  "/signup",
+  "/forgot-password",
+  "/reset-password",
+  "/debounce-demo",
+]);
 
 /**
  * Optimistic check only (cookie present?) — no DB here. Pages re-validate the session via

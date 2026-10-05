@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { InboxView } from "@/components/inbox/inbox-view";
 import type { InboxFilter } from "@/lib/types";
-import { requireInboxAuth } from "@/lib/server/auth/session";
+import { LockedFeature } from "@/components/shell/locked-feature";
+import { lockReason } from "@/lib/feature-access";
+import { requireAppAuth } from "@/lib/server/auth/session";
 
 export const metadata: Metadata = { title: "Inbox" };
 
@@ -12,7 +14,9 @@ function isFilter(value: unknown): value is InboxFilter {
 }
 
 export default async function InboxPage({ searchParams }: PageProps<"/inbox">) {
-  await requireInboxAuth();
+  const { state } = await requireAppAuth();
+  const locked = lockReason(state.workspace, "inbox");
+  if (locked) return <LockedFeature feature="inbox" reason={locked} />;
   const { c, filter } = await searchParams;
   return (
     <InboxView

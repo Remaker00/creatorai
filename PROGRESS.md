@@ -40,12 +40,21 @@
 - `/` and `/pricing` are now dynamic (the header reads the session).
 - Verified with curl: header states logged in and out, `/account`, theme script and light CSS emitted. tsc, lint and build pass. Not browser-tested, so light-mode visuals haven't been checked by eye.
 
+## Done — Marketing site, in-dashboard locks, password reset (2026-10-05)
+- Login/signup land on `/`. Header for visitors: Features/Pricing/About + Start Now (no Log in; mobile uses a menu). Signed in: Dashboard + profile menu. Footer has no links.
+- New brand mark (`components/shell/logo.tsx`) and favicon `app/icon.svg` (replaced the default `favicon.ico`).
+- Home: animated inbox preview (message → intent → drafting → typed reply → sent; loops, respects reduced motion) and two new sections ("Every kind of message", "You stay in control"). New `/features` (5 sections + sticky section nav), `/about`. `/pricing` adds "What you get on day one" and an FAQ, and shows the current plan.
+- Auth cards hold the logo and the alternate link inside one card. "Forgot password?" on login.
+- Dashboard is always reachable when signed in. Locked pages render a blurred copy of their layout plus an unlock card (`LockedFeature`, rules in `lib/feature-access.ts`): no plan → everything but `/account`; no Instagram → Inbox and Comments. Sidebar shows locks and a "continue setup" card.
+- Password reset: `/forgot-password` → emailed single-use link (SHA-256 stored, 30 min, newest only) → `/reset-password` sets the password, revokes all sessions and signs in. Migration `0004`. Mailer: Resend via fetch if `RESEND_API_KEY`/`EMAIL_FROM` are set; dev shows the link on screen and logs it; production never logs it.
+- Verified with curl and SQL: pages, header/footer states, favicon, lock matrix (no plan / no Instagram / demo fully unlocked), reset happy path, short password, reuse, expiry, superseded link, old sessions revoked, no-referrer on the reset page. tsc, lint and build pass. Not browser-tested, so visuals and animation weren't checked by eye.
+
 ## Known gaps
 - Conversation writes (send, read/unread, status) are optimistic only, not persisted yet; they reset on reload.
 - Comments and session stats reset on reload; other services still mock (by design, see DECISIONS).
 - Seed times are relative to when the seed runs; reseed to refresh.
 - Mock services (AI settings, automations, accounts, comments, analytics) are still localStorage and not workspace-scoped. A new workspace sees the demo mock data on those pages; its Inbox (DB) is empty because the placeholder connection imports no messages.
-- No login rate limiting / lockout yet (needs shared store). No email verification or password reset.
+- No login/reset rate limiting yet (needs a shared store). No email verification. Production email needs `RESEND_API_KEY` + `EMAIL_FROM`; without them reset emails aren't sent.
 - Nothing committed yet.
 
 ## Next (not started)

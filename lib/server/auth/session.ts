@@ -25,17 +25,12 @@ export async function clearSessionCookie(): Promise<void> {
   (await cookies()).set(SESSION_COOKIE, "", { ...sessionCookieOptions, maxAge: 0 });
 }
 
-/** For dashboard pages: signed in with a plan chosen, else redirect. */
+/**
+ * For dashboard pages: signed in, else redirect. Plan/Instagram gating is shown in-page
+ * (`lockReason` + `LockedFeature`), so the dashboard layout stays visible while locked.
+ */
 export async function requireAppAuth(): Promise<AuthContext> {
   const auth = await getAuth();
   if (!auth) redirect("/login");
-  if (!auth.state.workspace.plan) redirect("/pricing");
-  return auth;
-}
-
-/** For the Inbox: additionally requires a connected Instagram account. */
-export async function requireInboxAuth(): Promise<AuthContext> {
-  const auth = await requireAppAuth();
-  if (!auth.state.workspace.instagramConnected) redirect("/onboarding");
   return auth;
 }

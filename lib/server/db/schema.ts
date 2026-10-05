@@ -90,6 +90,20 @@ export const sessions = pgTable(
   (t) => [index("sessions_user_idx").on(t.userId), index("sessions_expires_idx").on(t.expiresAt)],
 );
 
+/** Password reset links. `id` is the SHA-256 of the emailed token; rows are single-use and short-lived. */
+export const passwordResetTokens = pgTable(
+  "password_reset_tokens",
+  {
+    id: id(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [index("password_reset_tokens_user_idx").on(t.userId)],
+);
+
 export const socialAccounts = pgTable(
   "social_accounts",
   {
